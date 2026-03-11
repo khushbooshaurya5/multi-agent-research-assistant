@@ -16,7 +16,7 @@ def web_search(query: str, max_results: int = 5) -> str:
         headers = {"User-Agent": "Mozilla/5.0 (Research Assistant Bot)"}
         url = f"https://html.duckduckgo.com/html/?q={query}"
         response = requests.get(url, headers=headers, timeout=10)
-        if response.status_code != 200:
+        if response.status_code not in [200, 202]:
             return f"Search failed with status {response.status_code}"
         soup = BeautifulSoup(response.text, "html.parser")
         results = []
